@@ -1,3 +1,4 @@
+//how to use array inside hash
 array = {arcanine: {name: 'arcanine', stat:{hp:10, attack:20}}}
 class Pokemon{
   constructor(namePokemon){
