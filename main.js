@@ -26,7 +26,12 @@ function loadDoc(nameforUrl) {
       document.getElementById('pokemon-picture').appendChild(img)
     }
   };
-  xhttp.open("GET", `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`, true);
+  if (isNaN(nameforUrl)){
+    url = `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`
+  } else {
+    url = `https://fizal.me/pokeapi/api/v2/id/${nameforUrl}.json`
+  }
+  xhttp.open("GET", url, true);
   xhttp.send();
 }
 //how to use array inside hash
@@ -79,6 +84,7 @@ class Trainer{
 function fetch(){
   aj = new Trainer ()
   var x = document.getElementById("myInput");
+  console.log(isNaN(x.value));
   aj.get(x.value)
 }
 
