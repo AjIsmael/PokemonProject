@@ -57,10 +57,52 @@ function loadDoc(nameforUrl) {
       document.getElementById('defense-progress').classList.add(`progress-bar-${new2}`)
 
       document.getElementById('special-attack').innerHTML = pokemon.special_attack
-      document.getElementById('special-defense').innerHTML = pokemon.special_defense
-      document.getElementById('speed').innerHTML = pokemon.speed
-      if(document.getElementById('pokemon-picture').childElementCount > 0){
+      percentageSA = (pokemon.special_attack/255)*100
+      document.getElementById('sa-progress').style.width = `${percentageSA}%`
+      if(pokemon.special_attack > 120){
+        new3 = 'success'
+      } else if (pokemon.special_attack > 65 ){
+        new3 = 'warning'
+      } else{
+        new3 = 'danger'
+      }
+      if (document.getElementById('sa-progress').classList.length = 3){
+        document.getElementById('sa-progress').classList.remove(document.getElementById('sa-progress').classList[3])
+      }
+      document.getElementById('sa-progress').classList.add(`progress-bar-${new3}`)
 
+      document.getElementById('special-defense').innerHTML = pokemon.special_defense
+      percentageSD = (pokemon.special_defense/255)*100
+      document.getElementById('sd-progress').style.width = `${percentageSD}%`
+      if(pokemon.special_defense > 120){
+        new4 = 'success'
+      } else if (pokemon.special_defense > 65 ){
+        new4 = 'warning'
+      } else{
+        new4 = 'danger'
+      }
+      if (document.getElementById('sd-progress').classList.length = 3){
+        document.getElementById('sd-progress').classList.remove(document.getElementById('sd-progress').classList[3])
+      }
+      document.getElementById('sd-progress').classList.add(`progress-bar-${new4}`)
+
+      document.getElementById('speed').innerHTML = pokemon.speed
+      percentageS = (pokemon.speed/255)*100
+      document.getElementById('sp-progress').style.width = `${percentageS}%`
+      if(pokemon.speed > 120){
+        new5 = 'success'
+      } else if (pokemon.speed > 65 ){
+        new5 = 'warning'
+      } else{
+        new5 = 'danger'
+      }
+      if (document.getElementById('sp-progress').classList.length = 3){
+        document.getElementById('sp-progress').classList.remove(document.getElementById('sp-progress').classList[3])
+      }
+      document.getElementById('sp-progress').classList.add(`progress-bar-${new5}`)
+
+
+      if(document.getElementById('pokemon-picture').childElementCount > 0){
         document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[1])
       }
       img = document.createElement('IMG')
