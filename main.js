@@ -12,11 +12,25 @@ function loadDoc(nameforUrl) {
       document.getElementById('ability').innerHTML = pokemon.abilities
       document.getElementById('type').innerHTML = pokemon.type
       document.getElementById('hp').innerHTML = pokemon.hp
+      percentage = (pokemon.hp/255)*100
+      document.getElementById('hp-progress').style.width = `${percentage}%`
+      if(pokemon.hp > 120){
+        newClass = 'success'
+      } else if (pokemon.hp > 65 ){
+        newClass = 'warning'
+      } else{
+        newClass = 'danger'
+      }
+      if (document.getElementById('hp-progress').classList.length = 3){
+        document.getElementById('hp-progress').classList.remove(document.getElementById('hp-progress').classList[3])
+      }
+      
+      document.getElementById('hp-progress').classList.add(`progress-bar-${newClass}`)
       document.getElementById('attack').innerHTML = pokemon.attack
       document.getElementById('defense').innerHTML = pokemon.defense
       document.getElementById('special-attack').innerHTML = pokemon.special_attack
       document.getElementById('special-defense').innerHTML = pokemon.special_defense
-      //document.getElementById('Speed').innerHTML = pokemon.speed
+      document.getElementById('speed').innerHTML = pokemon.speed
       if(document.getElementById('pokemon-picture').childElementCount > 0){
 
         document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[1])
@@ -63,16 +77,16 @@ class Pokemon{
     this.special_attack = myObj.stats[2].base_stat
     this.special_defense = myObj.stats[1].base_stat
     this.speed = myObj.stats[0].base_stat
-    this.url = myObj.sprites.back_default
+    this.url = myObj.sprites.front_default
   }
 }
 class Trainer{
-  constructor(trainerName){
+  constructor(trainerName, pokemon1, pokemon2, pokemon3){
     this.trainerName = trainerName
-    this.list = []
+    this.pokemonIdentifer = []
+    this.list = [pokemon1, pokemon2, pokemon3]
   }
   get(identifier){
-    //newpokemonObject = new Pokemon(namePokemon)
    loadDoc(identifier)
   }
   all(){
@@ -84,7 +98,6 @@ class Trainer{
 function fetch(){
   aj = new Trainer ()
   var x = document.getElementById("myInput");
-  console.log(isNaN(x.value));
   aj.get(x.value)
 }
 

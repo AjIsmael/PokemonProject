@@ -1,54 +1,45 @@
 .main-container {
-  width: 80%;
+  /* width: 80%; */
   height: 440px;
-  background-image: url("https://wallpaperplay.com/walls/full/e/c/2/70296.jpg");
-  margin-left: 5%;
+  /* background-image: url("https://wallpaperplay.com/walls/full/e/c/2/70296.jpg"); */
+  /* margin-left: 5%;
   margin-top: 50px;
   padding: 5%;
   display: grid;
   grid-template: auto / 48% 48%;
-  grid-gap: 4%;
+  grid-gap: 4%; */
 }
 
 img {
-  height: 100%;
+  height: 80%;
   width: 80%;
 }
 
 /* Aural */
 
 .main-container:div{
-  display: inline;
-  width: 80%;
-  height: 80%;
-  margin-left: 10%;
-  margin-top: 5%;
+  /* display: inline;
+  width: 80%; */
+  height: 50%;
+  /* margin-left: 10%;
+  margin-top: 5%; */
 }
 
 #pokemon-picture {
-  background-color: rgba(255, 0, 0, 0.5);
+  /* background-color: rgba(255, 0, 0, 0.5); */
 }
 
 .pokemon-info {
-  background-color: rgba(255, 0, 0, 0.5);
+  /* background-color: rgba(255, 0, 0, 0.5); */
 
 }
 .info-stat {
   display: grid;
   grid-template: auto auto / 30% 30% 30%;
   width:80%;
-  height: 50%;
-  grid-gap: 2%;
+  height: 100%;
+  grid-gap: 2%; */
   margin-left: 3%;
-}
-
-
-
-.pokemon-detail {
-  width: 60%;
-  background-color: rgba(255, 0, 0, 0.5);
-  margin-left: 20%;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  height: 180px;
+  border: 5px solid blue;
+  border-radius: 10%;
 }
