@@ -3,31 +3,59 @@ function loadDoc(nameforUrl) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       myObj = JSON.parse(this.responseText);
-      Pokemon_arr.push(myObj)
+      // Pokemon_arr.push(myObj)
       pokemon = new Pokemon(nameforUrl)
       document.getElementById('height').innerHTML = pokemon.height
       document.getElementById('weight').innerHTML = pokemon.weight
-      //document.getElementById('gender').innerHTML = pokemon.gender
+      document.getElementById('gender').innerHTML = pokemon.name
       //document.getElementById('catagory').innerHTML = pokemon.catagory
       document.getElementById('ability').innerHTML = pokemon.abilities
       document.getElementById('type').innerHTML = pokemon.type
       document.getElementById('hp').innerHTML = pokemon.hp
-      percentage = (pokemon.hp/255)*100
-      document.getElementById('hp-progress').style.width = `${percentage}%`
+      percentageHp = (pokemon.hp/255)*100
+      document.getElementById('hp-progress').style.width = `${percentageHp}%`
       if(pokemon.hp > 120){
-        newClass = 'success'
+        new0 = 'success'
       } else if (pokemon.hp > 65 ){
-        newClass = 'warning'
+        new0 = 'warning'
       } else{
-        newClass = 'danger'
+        new0 = 'danger'
       }
       if (document.getElementById('hp-progress').classList.length = 3){
         document.getElementById('hp-progress').classList.remove(document.getElementById('hp-progress').classList[3])
       }
-      
-      document.getElementById('hp-progress').classList.add(`progress-bar-${newClass}`)
+      document.getElementById('hp-progress').classList.add(`progress-bar-${new0}`)
+
       document.getElementById('attack').innerHTML = pokemon.attack
+      percentageAttack = (pokemon.attack/255)*100
+      document.getElementById('attack-progress').style.width = `${percentageAttack}%`
+      if(pokemon.attack > 120){
+        new1 = 'success'
+      } else if (pokemon.attack > 65 ){
+        new1 = 'warning'
+      } else{
+        new1 = 'danger'
+      }
+      if (document.getElementById('attack-progress').classList.length = 3){
+        document.getElementById('attack-progress').classList.remove(document.getElementById('attack-progress').classList[3])
+      }
+      document.getElementById('attack-progress').classList.add(`progress-bar-${new1}`)
+
       document.getElementById('defense').innerHTML = pokemon.defense
+      percentageDefense = (pokemon.defense/255)*100
+      document.getElementById('defense-progress').style.width = `${percentageDefense}%`
+      if(pokemon.defense > 120){
+        new2 = 'success'
+      } else if (pokemon.defense > 65 ){
+        new2 = 'warning'
+      } else{
+        new2 = 'danger'
+      }
+      if (document.getElementById('defense-progress').classList.length = 3){
+        document.getElementById('defense-progress').classList.remove(document.getElementById('defense-progress').classList[3])
+      }
+      document.getElementById('defense-progress').classList.add(`progress-bar-${new2}`)
+
       document.getElementById('special-attack').innerHTML = pokemon.special_attack
       document.getElementById('special-defense').innerHTML = pokemon.special_defense
       document.getElementById('speed').innerHTML = pokemon.speed
@@ -41,7 +69,7 @@ function loadDoc(nameforUrl) {
     }
   };
   if (isNaN(nameforUrl)){
-    url = `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`
+    url = `https://fizal.me/pokeapi/api/v2/name/${nameforUrl.toLowerCase()}.json`
   } else {
     url = `https://fizal.me/pokeapi/api/v2/id/${nameforUrl}.json`
   }
