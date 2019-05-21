@@ -1,24 +1,64 @@
+function loadDoc(nameforUrl) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myObj = JSON.parse(this.responseText);
+      Pokemon_arr.push(myObj)
+      pokemon = new Pokemon(nameforUrl)
+      document.getElementById('height').innerHTML = pokemon.height
+      document.getElementById('weight').innerHTML = pokemon.weight
+      //document.getElementById('gender').innerHTML = pokemon.gender
+      //document.getElementById('catagory').innerHTML = pokemon.catagory
+      document.getElementById('ability').innerHTML = pokemon.abilities
+      document.getElementById('type').innerHTML = pokemon.type
+      document.getElementById('hp').innerHTML = pokemon.hp
+      document.getElementById('attack').innerHTML = pokemon.attack
+      document.getElementById('defense').innerHTML = pokemon.defense
+      document.getElementById('special-attack').innerHTML = pokemon.special_attack
+      document.getElementById('special-defense').innerHTML = pokemon.special_defense
+      //document.getElementById('Speed').innerHTML = pokemon.speed
+      if(document.getElementById('pokemon-picture').childElementCount > 0){
+
+        document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[1])
+      }
+      img = document.createElement('IMG')
+      img.setAttribute("src", pokemon.url);
+      document.getElementById('pokemon-picture').appendChild(img)
+    }
+  };
+  xhttp.open("GET", `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`, true);
+  xhttp.send();
+}
 //how to use array inside hash
 Pokemon_arr = []
 
 class Pokemon{
-  constructor(name,id,hp){
-    this.name = name
-    this.id = id
-    this.height = height
-    this.weight = weight
+  constructor(){
+    this.name = myObj['forms'][0]['name']
+    this.id = myObj.id
+    this.height = myObj.height
+    this.weight = myObj.weight
     this.gender = gender
     this.catagory = catagory
-    this.abilities = abilities
-    this.type = type
-    this.hp = hp
-    this.attack = attack
-    this.defense = defense
-    this.special_attack = special_attack
-    this.special_defense = special_defense
-    this.speed = speed
-
-
+    this.abilities = []
+    let i = 0
+    while (i < myObj.abilities.length) {
+      this.abilities.push(myObj.abilities[i].ability.name);
+      i++;
+    }
+    this.type = []
+    let a = 0
+    while (a < myObj.types.length) {
+      this.type.push(myObj.types[a].type.name);
+      a++;
+    }
+    this.hp = myObj.stats[5].base_stat
+    this.attack = myObj.stats[4].base_stat
+    this.defense = myObj.stats[3].base_stat
+    this.special_attack = myObj.stats[2].base_stat
+    this.special_defense = myObj.stats[1].base_stat
+    this.speed = myObj.stats[0].base_stat
+    this.url = myObj.sprites.back_default
   }
 }
 class Trainer{
@@ -26,13 +66,9 @@ class Trainer{
     this.trainerName = trainerName
     this.list = []
   }
-  get(namePokemon){
-    let newpokemonObject = new Pokemon(namePokemon)
-    //this.list.push(newpokemonObject.newpokemonName)
-    console.log(newpokemonObject.pokemonName);
-    console.log(newpokemonObject.hp);
-    console.log(newpokemonObject.attack);
-    return newpokemonObject
+  get(identifier){
+    //newpokemonObject = new Pokemon(namePokemon)
+   loadDoc(identifier)
   }
   all(){
 
@@ -40,40 +76,46 @@ class Trainer{
 
 }
 
-function loadDoc(nameforUrl) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     myObj = JSON.parse(this.responseText);
-     document.getElementById('height').innerHTML = myObj.height
-
-
-     console.log(myObj['forms'][0]['name']);
-     i=0
-     while (i < myObj.abilities.length) {
-       console.log(myObj.abilities[i].ability.name);
-       i++;
-     }
-     a = 0
-     while (a < myObj.types.length) {
-       console.log(myObj.types[a].type.name);
-       a++;
-     }
-     console.log(myObj.stats[0].base_stat);//speed
-     console.log(myObj.stats[1].base_stat);//special-defense
-     console.log(myObj.stats[2].base_stat);//special-attack
-     console.log(myObj.stats[3].base_stat);//defense
-     console.log(myObj.stats[4].base_stat);//attack
-     console.log(myObj.stats[5].base_stat);//hp
-     console.log(myObj.height);
-     console.log(myObj.weight);
-     console.log(myObj.id);
-     console.log(myObj.sprites.back_default);//urlimage
-     let pokemon = new Pokemon(myObj.forms.name)
-        Pokemon_arr.push(pokemon)
-
-    }
-  };
-  xhttp.open("GET", `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`, true);
-  xhttp.send();
+function fetch(){
+  aj = new Trainer ()
+  var x = document.getElementById("myInput");
+  aj.get(x.value)
 }
+
+// function loadDoc(nameforUrl) {
+//   var xhttp = new XMLHttpRequest();
+//   xhttp.onreadystatechange = function() {
+//     if (this.readyState == 4 && this.status == 200) {
+//      myObj = JSON.parse(this.responseText);
+//      document.getElementById('height').innerHTML = myObj.height
+//
+//
+//      console.log(myObj['forms'][0]['name']);
+//      i=0
+//      while (i < myObj.abilities.length) {
+//        console.log(myObj.abilities[i].ability.name);
+//        i++;
+//      }
+//      a = 0
+//      while (a < myObj.types.length) {
+//        console.log(myObj.types[a].type.name);
+//        a++;
+//      }
+//      console.log(myObj.stats[0].base_stat);//speed
+//      console.log(myObj.stats[1].base_stat);//special-defense
+//      console.log(myObj.stats[2].base_stat);//special-attack
+//      console.log(myObj.stats[3].base_stat);//defense
+//      console.log(myObj.stats[4].base_stat);//attack
+//      console.log(myObj.stats[5].base_stat);//hp
+//      console.log(myObj.height);
+//      console.log(myObj.weight);
+//      console.log(myObj.id);
+//      console.log(myObj.sprites.back_default);//urlimage
+//      let pokemon = new Pokemon(myObj.forms.name)
+//         Pokemon_arr.push(pokemon)
+//
+//     }
+//   };
+//   xhttp.open("GET", `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`, true);
+//   xhttp.send();
+// }
