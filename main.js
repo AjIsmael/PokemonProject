@@ -1,113 +1,30 @@
-function loadDoc(nameforUrl) {
+Trainer_pack = []
+AllPokemon = []
+function loadDoc(nameforUrl, boolean) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       myObj = JSON.parse(this.responseText);
-      // Pokemon_arr.push(myObj)
-      pokemon = new Pokemon(nameforUrl)
-      document.getElementById('height').innerHTML = pokemon.height
-      document.getElementById('weight').innerHTML = pokemon.weight
-      document.getElementById('gender').innerHTML = pokemon.name
-      //document.getElementById('catagory').innerHTML = pokemon.catagory
-      document.getElementById('ability').innerHTML = pokemon.abilities
-      document.getElementById('type').innerHTML = pokemon.type
-      document.getElementById('hp').innerHTML = pokemon.hp
-      percentageHp = (pokemon.hp/255)*100
-      document.getElementById('hp-progress').style.width = `${percentageHp}%`
-      if(pokemon.hp > 120){
-        new0 = 'success'
-      } else if (pokemon.hp > 65 ){
-        new0 = 'warning'
-      } else{
-        new0 = 'danger'
+      ability = []
+      let i = 0
+      while (i < myObj.abilities.length) {
+        ability.push(myObj.abilities[i].ability.name);
+        i++;
       }
-      if (document.getElementById('hp-progress').classList.length = 3){
-        document.getElementById('hp-progress').classList.remove(document.getElementById('hp-progress').classList[3])
+      type = []
+      let a = 0
+      while (a < myObj.types.length) {
+        type.push(myObj.types[a].type.name);
+        a++;
       }
-      document.getElementById('hp-progress').classList.add(`progress-bar-${new0}`)
+      pokemon = new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default)
+      if(boolean){
+        show()
 
-      document.getElementById('attack').innerHTML = pokemon.attack
-      percentageAttack = (pokemon.attack/255)*100
-      document.getElementById('attack-progress').style.width = `${percentageAttack}%`
-      if(pokemon.attack > 120){
-        new1 = 'success'
-      } else if (pokemon.attack > 65 ){
-        new1 = 'warning'
-      } else{
-        new1 = 'danger'
+      }else{
+        AllPokemon.push(pokemon)
       }
-      if (document.getElementById('attack-progress').classList.length = 3){
-        document.getElementById('attack-progress').classList.remove(document.getElementById('attack-progress').classList[3])
-      }
-      document.getElementById('attack-progress').classList.add(`progress-bar-${new1}`)
-
-      document.getElementById('defense').innerHTML = pokemon.defense
-      percentageDefense = (pokemon.defense/255)*100
-      document.getElementById('defense-progress').style.width = `${percentageDefense}%`
-      if(pokemon.defense > 120){
-        new2 = 'success'
-      } else if (pokemon.defense > 65 ){
-        new2 = 'warning'
-      } else{
-        new2 = 'danger'
-      }
-      if (document.getElementById('defense-progress').classList.length = 3){
-        document.getElementById('defense-progress').classList.remove(document.getElementById('defense-progress').classList[3])
-      }
-      document.getElementById('defense-progress').classList.add(`progress-bar-${new2}`)
-
-      document.getElementById('special-attack').innerHTML = pokemon.special_attack
-      percentageSA = (pokemon.special_attack/255)*100
-      document.getElementById('sa-progress').style.width = `${percentageSA}%`
-      if(pokemon.special_attack > 120){
-        new3 = 'success'
-      } else if (pokemon.special_attack > 65 ){
-        new3 = 'warning'
-      } else{
-        new3 = 'danger'
-      }
-      if (document.getElementById('sa-progress').classList.length = 3){
-        document.getElementById('sa-progress').classList.remove(document.getElementById('sa-progress').classList[3])
-      }
-      document.getElementById('sa-progress').classList.add(`progress-bar-${new3}`)
-
-      document.getElementById('special-defense').innerHTML = pokemon.special_defense
-      percentageSD = (pokemon.special_defense/255)*100
-      document.getElementById('sd-progress').style.width = `${percentageSD}%`
-      if(pokemon.special_defense > 120){
-        new4 = 'success'
-      } else if (pokemon.special_defense > 65 ){
-        new4 = 'warning'
-      } else{
-        new4 = 'danger'
-      }
-      if (document.getElementById('sd-progress').classList.length = 3){
-        document.getElementById('sd-progress').classList.remove(document.getElementById('sd-progress').classList[3])
-      }
-      document.getElementById('sd-progress').classList.add(`progress-bar-${new4}`)
-
-      document.getElementById('speed').innerHTML = pokemon.speed
-      percentageS = (pokemon.speed/255)*100
-      document.getElementById('sp-progress').style.width = `${percentageS}%`
-      if(pokemon.speed > 120){
-        new5 = 'success'
-      } else if (pokemon.speed > 65 ){
-        new5 = 'warning'
-      } else{
-        new5 = 'danger'
-      }
-      if (document.getElementById('sp-progress').classList.length = 3){
-        document.getElementById('sp-progress').classList.remove(document.getElementById('sp-progress').classList[3])
-      }
-      document.getElementById('sp-progress').classList.add(`progress-bar-${new5}`)
-
-
-      if(document.getElementById('pokemon-picture').childElementCount > 0){
-        document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[1])
-      }
-      img = document.createElement('IMG')
-      img.setAttribute("src", pokemon.url);
-      document.getElementById('pokemon-picture').appendChild(img)
+      return pokemon
     }
   };
   if (isNaN(nameforUrl)){
@@ -117,94 +34,166 @@ function loadDoc(nameforUrl) {
   }
   xhttp.open("GET", url, true);
   xhttp.send();
+
 }
 //how to use array inside hash
-Pokemon_arr = []
+
 
 class Pokemon{
-  constructor(){
-    this.name = myObj['forms'][0]['name']
-    this.id = myObj.id
-    this.height = myObj.height
-    this.weight = myObj.weight
-    this.gender = gender
-    this.catagory = catagory
-    this.abilities = []
-    let i = 0
-    while (i < myObj.abilities.length) {
-      this.abilities.push(myObj.abilities[i].ability.name);
-      i++;
-    }
-    this.type = []
-    let a = 0
-    while (a < myObj.types.length) {
-      this.type.push(myObj.types[a].type.name);
-      a++;
-    }
-    this.hp = myObj.stats[5].base_stat
-    this.attack = myObj.stats[4].base_stat
-    this.defense = myObj.stats[3].base_stat
-    this.special_attack = myObj.stats[2].base_stat
-    this.special_defense = myObj.stats[1].base_stat
-    this.speed = myObj.stats[0].base_stat
-    this.url = myObj.sprites.front_default
+  constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url){
+    this.name = name
+    // myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default
+    this.id = id
+    this.height = height
+    this.weight = weight
+    this.abilities = ability
+    this.type = type
+    this.hp = hp
+    this.attack = attack
+    this.defense = defense
+    this.special_attack = special_attack
+    this.special_defense = special_defense
+    this.speed = speed
+    this.url = url
   }
 }
 class Trainer{
   constructor(trainerName, pokemon1, pokemon2, pokemon3){
     this.trainerName = trainerName
     this.pokemonIdentifer = []
-    this.list = [pokemon1, pokemon2, pokemon3]
+    this.list = [this.trainerName, pokemon1, pokemon2, pokemon3]
+    if(!(this.trainerName == undefined)){
+      Trainer_pack.push(this.list)
+    }
+
   }
   get(identifier){
-   loadDoc(identifier)
+   let pokemon
+   loadDoc(identifier, true)
+   console.log(pokemon);
   }
   all(){
 
+
   }
 
 }
-
+ajaeb = new Trainer("ajaeb", "arcanine","kadabra","machoke")
 function fetch(){
-  aj = new Trainer ()
   var x = document.getElementById("myInput");
-  aj.get(x.value)
+  if (Trainer_pack[0].includes(x.value)){
+    console.log("trained");
+    a = ajaeb.get(x.value)
+    } else {
+    console.log("untrained");
+    untrained = new Trainer ()
+    untrained.get(x.value)
+  }
 }
+function show() {
+  document.getElementById('height').innerHTML = pokemon.height
+  document.getElementById('weight').innerHTML = pokemon.weight
+  document.getElementById('gender').innerHTML = pokemon.name
+  //document.getElementById('catagory').innerHTML = pokemon.catagory
+  document.getElementById('ability').innerHTML = pokemon.abilities
+  document.getElementById('type').innerHTML = pokemon.type
+  document.getElementById('hp').innerHTML = pokemon.hp
+  percentageHp = (pokemon.hp/255)*100
+  document.getElementById('hp-progress').style.width = `${percentageHp}%`
+  if(pokemon.hp > 120){
+    new0 = 'success'
+  } else if (pokemon.hp > 65 ){
+    new0 = 'warning'
+  } else{
+    new0 = 'danger'
+  }
+  if (document.getElementById('hp-progress').classList.length = 3){
+    document.getElementById('hp-progress').classList.remove(document.getElementById('hp-progress').classList[3])
+  }
+  document.getElementById('hp-progress').classList.add(`progress-bar-${new0}`)
 
-// function loadDoc(nameforUrl) {
-//   var xhttp = new XMLHttpRequest();
-//   xhttp.onreadystatechange = function() {
-//     if (this.readyState == 4 && this.status == 200) {
-//      myObj = JSON.parse(this.responseText);
-//      document.getElementById('height').innerHTML = myObj.height
-//
-//
-//      console.log(myObj['forms'][0]['name']);
-//      i=0
-//      while (i < myObj.abilities.length) {
-//        console.log(myObj.abilities[i].ability.name);
-//        i++;
-//      }
-//      a = 0
-//      while (a < myObj.types.length) {
-//        console.log(myObj.types[a].type.name);
-//        a++;
-//      }
-//      console.log(myObj.stats[0].base_stat);//speed
-//      console.log(myObj.stats[1].base_stat);//special-defense
-//      console.log(myObj.stats[2].base_stat);//special-attack
-//      console.log(myObj.stats[3].base_stat);//defense
-//      console.log(myObj.stats[4].base_stat);//attack
-//      console.log(myObj.stats[5].base_stat);//hp
-//      console.log(myObj.height);
-//      console.log(myObj.weight);
-//      console.log(myObj.id);
-//      console.log(myObj.sprites.back_default);//urlimage
-//      let pokemon = new Pokemon(myObj.forms.name)
-//         Pokemon_arr.push(pokemon)
-//
-//     }
-//   };
-//   xhttp.open("GET", `https://fizal.me/pokeapi/api/v2/name/${nameforUrl}.json`, true);
-//   xhttp.send();
-// }
+  document.getElementById('attack').innerHTML = pokemon.attack
+  percentageAttack = (pokemon.attack/255)*100
+  document.getElementById('attack-progress').style.width = `${percentageAttack}%`
+  if(pokemon.attack > 120){
+    new1 = 'success'
+  } else if (pokemon.attack > 65 ){
+    new1 = 'warning'
+  } else{
+    new1 = 'danger'
+  }
+  if (document.getElementById('attack-progress').classList.length = 3){
+    document.getElementById('attack-progress').classList.remove(document.getElementById('attack-progress').classList[3])
+  }
+  document.getElementById('attack-progress').classList.add(`progress-bar-${new1}`)
+
+  document.getElementById('defense').innerHTML = pokemon.defense
+  percentageDefense = (pokemon.defense/255)*100
+  document.getElementById('defense-progress').style.width = `${percentageDefense}%`
+  if(pokemon.defense > 120){
+    new2 = 'success'
+  } else if (pokemon.defense > 65 ){
+    new2 = 'warning'
+  } else{
+    new2 = 'danger'
+  }
+  if (document.getElementById('defense-progress').classList.length = 3){
+    document.getElementById('defense-progress').classList.remove(document.getElementById('defense-progress').classList[3])
+  }
+  document.getElementById('defense-progress').classList.add(`progress-bar-${new2}`)
+
+  document.getElementById('special-attack').innerHTML = pokemon.special_attack
+  percentageSA = (pokemon.special_attack/255)*100
+  document.getElementById('sa-progress').style.width = `${percentageSA}%`
+  if(pokemon.special_attack > 120){
+    new3 = 'success'
+  } else if (pokemon.special_attack > 65 ){
+    new3 = 'warning'
+  } else{
+    new3 = 'danger'
+  }
+  if (document.getElementById('sa-progress').classList.length = 3){
+    document.getElementById('sa-progress').classList.remove(document.getElementById('sa-progress').classList[3])
+  }
+  document.getElementById('sa-progress').classList.add(`progress-bar-${new3}`)
+
+  document.getElementById('special-defense').innerHTML = pokemon.special_defense
+  percentageSD = (pokemon.special_defense/255)*100
+  document.getElementById('sd-progress').style.width = `${percentageSD}%`
+  if(pokemon.special_defense > 120){
+    new4 = 'success'
+  } else if (pokemon.special_defense > 65 ){
+    new4 = 'warning'
+  } else{
+    new4 = 'danger'
+  }
+  if (document.getElementById('sd-progress').classList.length = 3){
+    document.getElementById('sd-progress').classList.remove(document.getElementById('sd-progress').classList[3])
+  }
+  document.getElementById('sd-progress').classList.add(`progress-bar-${new4}`)
+
+  document.getElementById('speed').innerHTML = pokemon.speed
+  percentageS = (pokemon.speed/255)*100
+  document.getElementById('sp-progress').style.width = `${percentageS}%`
+  if(pokemon.speed > 120){
+    new5 = 'success'
+  } else if (pokemon.speed > 65 ){
+    new5 = 'warning'
+  } else{
+    new5 = 'danger'
+  }
+  if (document.getElementById('sp-progress').classList.length = 3){
+    document.getElementById('sp-progress').classList.remove(document.getElementById('sp-progress').classList[3])
+  }
+  document.getElementById('sp-progress').classList.add(`progress-bar-${new5}`)
+
+
+  if(document.getElementById('pokemon-picture').childElementCount > 0){
+    document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[1])
+  }
+  img = document.createElement('IMG')
+  img.setAttribute("src", pokemon.url);
+  document.getElementById('pokemon-picture').appendChild(img)
+  return pokemon
+
+}
