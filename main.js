@@ -1,5 +1,5 @@
-Trainer_pack = []
 AllPokemon = []
+AllPokemonName = []
 function loadDoc(nameforUrl, boolean) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -19,13 +19,7 @@ function loadDoc(nameforUrl, boolean) {
       }
       new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default)
       setTimeout(show,250)
-      // if(boolean){
-      //   setTimeout(show,250)
-      // }
-      // else{
-      //   AllPokemon.push(pokemon)
-      // }
-      // return pokemon
+
     }
   };
   if (isNaN(nameforUrl)){
@@ -37,13 +31,11 @@ function loadDoc(nameforUrl, boolean) {
   xhttp.send();
 
 }
-//how to use array inside hash
 
 
 class Pokemon{
   constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url){
     this.name = name
-    // myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default
     this.id = id
     this.height = height
     this.weight = weight
@@ -56,39 +48,40 @@ class Pokemon{
     this.special_defense = special_defense
     this.speed = speed
     this.url = url
-    // for (exsitingPokemon in AllPokemon) {
-    //   if (exsitingPokemon.name == this.name) {
-    //     console.log(AllPokemon.indexof(exsitingPokemon));
-    //   }
-    // }
+    console.log(this);
+    if(AllPokemonName.includes(this.name)){
+      let a = AllPokemonName.indexOf(this.name)
+      AllPokemon.splice(a,1)
+      AllPokemonName.splice(a,1)
+
+    }
     AllPokemon.push(this)
+    AllPokemonName.push(this.name);
   }
 }
 class Trainer{
-  constructor(trainerName, pockemon1, pockemon2, pockemon3 ){
+  constructor(trainerName){
     this.trainerName = trainerName
-
+    this.pokemonCollector = []
   }
   get(identifier){
-    loadDoc(identifier, true)
-    setTimeout(function(){ console.log(AllPokemon[AllPokemon.length-1])}, 100)
+    loadDoc(identifier)
   }
   all(){
     return AllPokemon
   }
 
 }
-ajaeb = new Trainer("ajaeb", "arcanine","kadabra","machoke")
+ajaeb = new Trainer("Ajaeb")
 function fetch(){
   var x = document.getElementById("myInput");
-  a = ajaeb.get(x.value)
+  ajaeb.get(x.value)
 }
 function show() {
   pokemon = AllPokemon[AllPokemon.length-1]
   document.getElementById('height').innerHTML = pokemon.height
   document.getElementById('weight').innerHTML = pokemon.weight
   document.getElementById('gender').innerHTML = pokemon.name
-  ///document.getElementById('catagory').innerHTML = pokemon.catagory
   document.getElementById('ability').innerHTML = pokemon.abilities
   document.getElementById('type').innerHTML = pokemon.type
   document.getElementById('hp').innerHTML = pokemon.hp
@@ -105,7 +98,6 @@ function show() {
     document.getElementById('hp-progress').classList.remove(document.getElementById('hp-progress').classList[3])
   }
   document.getElementById('hp-progress').classList.add(`progress-bar-${new0}`)
-
   document.getElementById('attack').innerHTML = pokemon.attack
   percentageAttack = (pokemon.attack/255)*100
   document.getElementById('attack-progress').style.width = `${percentageAttack}%`
@@ -120,7 +112,6 @@ function show() {
     document.getElementById('attack-progress').classList.remove(document.getElementById('attack-progress').classList[3])
   }
   document.getElementById('attack-progress').classList.add(`progress-bar-${new1}`)
-
   document.getElementById('defense').innerHTML = pokemon.defense
   percentageDefense = (pokemon.defense/255)*100
   document.getElementById('defense-progress').style.width = `${percentageDefense}%`
@@ -135,7 +126,6 @@ function show() {
     document.getElementById('defense-progress').classList.remove(document.getElementById('defense-progress').classList[3])
   }
   document.getElementById('defense-progress').classList.add(`progress-bar-${new2}`)
-
   document.getElementById('special-attack').innerHTML = pokemon.special_attack
   percentageSA = (pokemon.special_attack/255)*100
   document.getElementById('sa-progress').style.width = `${percentageSA}%`
@@ -150,7 +140,6 @@ function show() {
     document.getElementById('sa-progress').classList.remove(document.getElementById('sa-progress').classList[3])
   }
   document.getElementById('sa-progress').classList.add(`progress-bar-${new3}`)
-
   document.getElementById('special-defense').innerHTML = pokemon.special_defense
   percentageSD = (pokemon.special_defense/255)*100
   document.getElementById('sd-progress').style.width = `${percentageSD}%`
@@ -188,6 +177,4 @@ function show() {
   img = document.createElement('IMG')
   img.setAttribute("src", pokemon.url);
   document.getElementById('pokemon-picture').appendChild(img)
-  return pokemon
-
 }
