@@ -17,14 +17,15 @@ function loadDoc(nameforUrl, boolean) {
         type.push(myObj.types[a].type.name);
         a++;
       }
-      pokemon = new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default)
-      if(boolean){
-        show()
-
-      }else{
-        AllPokemon.push(pokemon)
-      }
-      return pokemon
+      new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default)
+      setTimeout(show,250)
+      // if(boolean){
+      //   setTimeout(show,250)
+      // }
+      // else{
+      //   AllPokemon.push(pokemon)
+      // }
+      // return pokemon
     }
   };
   if (isNaN(nameforUrl)){
@@ -55,46 +56,39 @@ class Pokemon{
     this.special_defense = special_defense
     this.speed = speed
     this.url = url
+    // for (exsitingPokemon in AllPokemon) {
+    //   if (exsitingPokemon.name == this.name) {
+    //     console.log(AllPokemon.indexof(exsitingPokemon));
+    //   }
+    // }
+    AllPokemon.push(this)
   }
 }
 class Trainer{
-  constructor(trainerName, pokemon1, pokemon2, pokemon3){
+  constructor(trainerName, pockemon1, pockemon2, pockemon3 ){
     this.trainerName = trainerName
-    this.pokemonIdentifer = []
-    this.list = [this.trainerName, pokemon1, pokemon2, pokemon3]
-    if(!(this.trainerName == undefined)){
-      Trainer_pack.push(this.list)
-    }
 
   }
   get(identifier){
-   let pokemon
-   loadDoc(identifier, true)
-   console.log(pokemon);
+    loadDoc(identifier, true)
+    setTimeout(function(){ console.log(AllPokemon[AllPokemon.length-1])}, 100)
   }
   all(){
-
-
+    return AllPokemon
   }
 
 }
 ajaeb = new Trainer("ajaeb", "arcanine","kadabra","machoke")
 function fetch(){
   var x = document.getElementById("myInput");
-  if (Trainer_pack[0].includes(x.value)){
-    console.log("trained");
-    a = ajaeb.get(x.value)
-    } else {
-    console.log("untrained");
-    untrained = new Trainer ()
-    untrained.get(x.value)
-  }
+  a = ajaeb.get(x.value)
 }
 function show() {
+  pokemon = AllPokemon[AllPokemon.length-1]
   document.getElementById('height').innerHTML = pokemon.height
   document.getElementById('weight').innerHTML = pokemon.weight
   document.getElementById('gender').innerHTML = pokemon.name
-  //document.getElementById('catagory').innerHTML = pokemon.catagory
+  ///document.getElementById('catagory').innerHTML = pokemon.catagory
   document.getElementById('ability').innerHTML = pokemon.abilities
   document.getElementById('type').innerHTML = pokemon.type
   document.getElementById('hp').innerHTML = pokemon.hp
