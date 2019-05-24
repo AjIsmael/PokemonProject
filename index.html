@@ -3,118 +3,120 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <title>PokeDex</title>
   </head>
   <body>
     <ul class="nav nav-pills nav-fill">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">link</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="#">
           <input type="search" id="myInput" onsearch="fetch()">
         </a>
       </li>
     </ul>
-    <section class="row main-container">
-      <div class="row col-12">
-        <div class="col-3" id = "pokemon-picture">
-
-      </div>
-        <div class ="col-9 info-stat">
-            <div class="col-4">
-              <h5>Height</h3>
-              <h5 id="height">N/A</h4>
-            </div>
-            <div class="col-4">
-              <h5>Weight</h5>
-              <h5 id="weight">N/A</h5>
-            </div>
-            <div class="col-4">
+    <section class="container main-container">
+      <div class="container first-container">
+        <div class="row">
+          <div class="col-3" id ="pokemon-picture"></div>
+          <div class ="container col-9 info-stat">
+            <div class="row">
+              <div class="col-4">
+                <h5>Height</h3>
+                  <h5 id="height">N/A</h4>
+                  </div>
+              <div class="col-4">
+                    <h5>Weight</h5>
+                    <h5 id="weight">N/A</h5>
+                  </div>
+              <div class="col-4">
               <h5>Gender</h5>
               <h5 id="gender">N/A</h5>
             </div>
-            <div class="col-4">
-              <h5>Catagory</h5>
-              <h5 id = "catagory">N/A</h5>
             </div>
-            <div class="col-4">
-              <h5>Abilities</h5>
-              <h5 id="ability">N/A</h5>
-            </div>
-            <div class="col-4">
-              <h5>Type</h5>
-              <h5 id="type">N/A</h5>
+            <div class="row">
+              <div class="col-4">
+                <h5>Catagory</h5>
+                <h5 id = "catagory">N/A</h5>
+              </div>
+              <div class="col-4">
+                <h5>Abilities</h5>
+                <h5 id="ability">N/A</h5>
+              </div>
+              <div class="col-4">
+                <h5>Type</h5>
+                <h5 id="type">N/A</h5>
+              </div>
             </div>
           </div>
+
+        </div>
       </div>
-      <div class="row col-12">
-        <div class ="col-9 info-stat">
-          <div class="col-4">
-            <h5>HP</h5>
-            <h5 id ="hp">N/A</h5>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" id="hp-progress" role="progressbar" style="width:0%">
+      <div class="container">
+        <div class="row">
+        <div class ="container col-9 info-stat">
+          <div class="row">
+            <div class="col-4">
+              <h5>HP</h5>
+              <h5 id ="hp">N/A</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" id="hp-progress" role="progressbar" style="width:0%">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <h5>Attack</h5>
+              <h5 id="attack">N/A</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" id="attack-progress" role="progressbar" style="width:0%">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <h5>Defense</h5>
+              <h5 id="defense">N/A</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" id="defense-progress" role="progressbar" style="width:0%">
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-4">
-            <h5>Attack</h5>
-            <h5 id="attack">N/A</h5>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" id="attack-progress" role="progressbar" style="width:0%">
+          <div class="row">
+            <div class="col-4">
+              <h5>Special Attack</h5>
+              <h5 id = "special-attack">N/A</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" id="sa-progress" role="progressbar" style="width:0%"></div>
               </div>
             </div>
-          </div>
-          <div class="col-4">
-            <h5>Defense</h5>
-            <h5 id="defense">N/A</h5>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" id="defense-progress" role="progressbar" style="width:0%">
+            <div class="col-4">
+              <h5>Special Defense</h5>
+              <h5 id="special-defense">N/A</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" id="sd-progress" role="progressbar" style="width:0%">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-4">
-            <h5>Special Attack</h5>
-            <h5 id = "special-attack">N/A</h5>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" id="sa-progress" role="progressbar" style="width:0%">
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <h5>Special Defense</h5>
-            <h5 id="special-defense">N/A</h5>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" id="sd-progress" role="progressbar" style="width:0%">
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <h5>Speed</h5>
-            <h5 id="speed">N/A</h5>
-            <div class="progress">
-              <div class="progress-bar progress-bar-striped active" id="sp-progress" role="progressbar" style="width:0%">
+            <div class="col-4">
+              <h5>Speed</h5>
+              <h5 id="speed">N/A</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" id="sp-progress" role="progressbar" style="width:0%">
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="col-3">
+        </div>
 
       </div>
-      <!-- <div class="col-9 pokemon-info">
-
-
-      </div> -->
+      </div>
     </section>
     <footer class="footerbar">
         <h4>Follow Us:</h4>

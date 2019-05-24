@@ -1,0 +1,27 @@
+.main-container {
+  height: 650px;
+}
+
+.first-container {
+  height: 50%;
+}
+.first-container:div {
+  height: 100%;
+}
+
+.info-stat {
+  border: 5px solid rgba(153, 51, 51, 0.8);
+  border-radius: 20px;
+  background-color: rgba(153, 51, 51, 0.2);
+}
+
+img {
+  height: 80%;
+  width: 80%;
+}
+
+.new {
+  height: 80%;
+}
+
+/*# sourceMappingURL=output.css.map */
