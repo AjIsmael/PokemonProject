@@ -1,7 +1,7 @@
 why = document.getElementById('pokemon-picture')
 AllPokemon = []
 AllPokemonName = []
-function loadDoc(nameforUrl, boolean) {
+function loadDoc(nameforUrl, trainerArray) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -18,9 +18,8 @@ function loadDoc(nameforUrl, boolean) {
         type.push(myObj.types[a].type.name);
         a++;
       }
-      new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default)
+      a = new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default,trainerArray)
       setTimeout(show,250)
-
     }
   };
   if (isNaN(nameforUrl)){
@@ -35,7 +34,7 @@ function loadDoc(nameforUrl, boolean) {
 
 
 class Pokemon{
-  constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url){
+  constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url,trainerArray){
     this.name = name
     this.id = id
     this.height = height
@@ -54,10 +53,12 @@ class Pokemon{
       let a = AllPokemonName.indexOf(this.name)
       AllPokemon.splice(a,1)
       AllPokemonName.splice(a,1)
-
     }
+
     AllPokemon.push(this)
     AllPokemonName.push(this.name);
+    trainerArray.push(this);
+    //trainerArrayName.push(this.name);
   }
 }
 class Trainer{
@@ -66,10 +67,11 @@ class Trainer{
     this.pokemonCollector = []
   }
   get(identifier){
-    loadDoc(identifier)
+    loadDoc(identifier, this.pokemonCollector)
+
   }
   all(){
-    return AllPokemon
+    return this.pokemonCollector
   }
 
 }

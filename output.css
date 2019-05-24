@@ -1,31 +1,40 @@
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css";
 @keyframes bounce-1 {
   0% {
     transform: translate(-100px, 0);
   }
   15% {
     transform: translate(-90px, -50px);
+    transform: scale3d(0.5, 0.5, 0.5);
   }
   30% {
     transform: translate(-75px, 0);
+    transform: scale3d(1, 1, 1);
   }
   45% {
     transform: translate(-60px, -50px);
+    transform: scale3d(1.5, 1.5, 1.5);
   }
   60% {
     transform: translate(-45px, 0);
+    transform: scale3d(1, 1, 1);
   }
   75% {
     transform: translate(-30px, -50px);
+    transform: scale3d(0.5, 0.5, 0.5);
   }
   90% {
     transform: translate(-15px, -25px);
+    transform: scale3d(1, 1, 1);
   }
   100% {
     transform: translate(0, 0);
   }
 }
 .main-container {
-  height: 650px;
+  height: 80vh;
+  margin-top: 3vh;
 }
 
 .first-container {
@@ -50,6 +59,10 @@ img {
 
 .new {
   height: 80%;
+}
+
+body {
+  background-color: rgba(139, 69, 19, 0.8);
 }
 
 /*# sourceMappingURL=output.css.map */
