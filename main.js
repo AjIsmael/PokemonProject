@@ -1,3 +1,4 @@
+why = document.getElementById('pokemon-picture')
 AllPokemon = []
 AllPokemonName = []
 function loadDoc(nameforUrl, boolean) {
@@ -172,7 +173,7 @@ function show() {
 
 
   if(document.getElementById('pokemon-picture').childElementCount > 0){
-    document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[1])
+    document.getElementById('pokemon-picture').removeChild(document.getElementById('pokemon-picture').childNodes[0])
   }
   img = document.createElement('IMG')
   img.setAttribute("src", pokemon.url);

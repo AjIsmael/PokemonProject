@@ -1,3 +1,15 @@
+@keyframes bounce-1 {
+    0%   { transform: translate(-100px,0);}
+    15%  { transform: translate(-90px,-50px);}
+    30% { transform: translate(-75px,0);}
+    45%  { transform: translate(-60px,-50px); }
+    60% { transform: translate(-45px,0);}
+    75%  { transform: translate(-30px,-50px);}
+    90% { transform: translate(-15px,-25px);}
+    100% { transform: translate(0,0);}
+}
+
+
 .main-container {
   height: 650px;
 }
@@ -16,6 +28,8 @@
 img {
   height: 80%;
   width: 80%;
+  animation: bounce-1;
+  animation-duration: 2s;
 }
 .new {
   height: 80%;
