@@ -1,7 +1,4 @@
-why = document.getElementById('pokemon-picture')
-AllPokemon = []
-AllPokemonName = []
-function loadDoc(nameforUrl, trainerArray) {
+function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -18,14 +15,14 @@ function loadDoc(nameforUrl, trainerArray) {
         type.push(myObj.types[a].type.name);
         a++;
       }
-      a = new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default,trainerArray)
-      setTimeout(show,250)
+      a = new Pokemon(myObj['forms'][0]['name'],myObj.id,myObj.height,myObj.weight,ability,type,myObj.stats[5].base_stat,myObj.stats[4].base_stat,myObj.stats[3].base_stat,myObj.stats[2].base_stat,myObj.stats[1].base_stat,myObj.stats[0].base_stat,myObj.sprites.front_default,trainerArray,trainerArrayName)
+      setTimeout(show(trainerArray,trainerArrayName),250)
     }
   };
   if (isNaN(nameforUrl)){
     url = `https://fizal.me/pokeapi/api/v2/name/${nameforUrl.toLowerCase()}.json`
   } else {
-    url = `https://fizal.me/pokeapi/api/v2/id/${nameforUrl}.json`
+    url = `https://fizal.me/pokeapi/api/v2/id/${+nameforUrl}.json`
   }
   xhttp.open("GET", url, true);
   xhttp.send();
@@ -34,7 +31,7 @@ function loadDoc(nameforUrl, trainerArray) {
 
 
 class Pokemon{
-  constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url,trainerArray){
+  constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url,trainerArray,trainerArrayName){
     this.name = name
     this.id = id
     this.height = height
@@ -49,25 +46,23 @@ class Pokemon{
     this.speed = speed
     this.url = url
     console.log(this);
-    if(AllPokemonName.includes(this.name)){
-      let a = AllPokemonName.indexOf(this.name)
-      AllPokemon.splice(a,1)
-      AllPokemonName.splice(a,1)
+    if(trainerArrayName.includes(this.name)){
+      let b = trainerArrayName.indexOf(this.name)
+      trainerArray.splice(b,1)
+      trainerArrayName.splice(b,1)
     }
-
-    AllPokemon.push(this)
-    AllPokemonName.push(this.name);
     trainerArray.push(this);
-    //trainerArrayName.push(this.name);
+    trainerArrayName.push(this.name);
   }
 }
 class Trainer{
   constructor(trainerName){
     this.trainerName = trainerName
     this.pokemonCollector = []
+    this.trainerPokemonName = []
   }
   get(identifier){
-    loadDoc(identifier, this.pokemonCollector)
+    loadDoc(identifier, this.pokemonCollector,this.trainerPokemonName)
 
   }
   all(){
@@ -80,8 +75,8 @@ function fetch(){
   var x = document.getElementById("myInput");
   ajaeb.get(x.value)
 }
-function show() {
-  pokemon = AllPokemon[AllPokemon.length-1]
+function show(pokemonList, pokemonNameList) {
+  pokemon = pokemonList[pokemonList.length-1]
   document.getElementById('height').innerHTML = pokemon.height
   document.getElementById('weight').innerHTML = pokemon.weight
   document.getElementById('gender').innerHTML = pokemon.name
@@ -180,4 +175,13 @@ function show() {
   img = document.createElement('IMG')
   img.setAttribute("src", pokemon.url);
   document.getElementById('pokemon-picture').appendChild(img)
+
+  his = document.createElement('a');
+  his.setAttribute("class", 'dropdown-item');
+  his.setAttribute('href', `javascript:ajaeb.get('${pokemon.name}')`);
+  his.innerHTML = pokemon.name;
+  document.getElementById('dropdown').appendChild(his)
+  if(document.getElementById('dropdown').childElementCount == 11){
+    document.getElementById('dropdown').removeChild(document.getElementById('dropdown').children[0])
+  }
 }
