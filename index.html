@@ -19,46 +19,51 @@
           <input type="search" id="myInput" onsearch="fetch()">
         </a>
       </li>
-      <div class="dropdown col-3">
+      <li class="dropdown col-3">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           History
         </button>
         <div class="dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuButton">
         </div>
-      </div>
+      </li>
     </ul>
     <section class="container main-container">
       <div class="container first-container">
         <div class="row">
           <div class="col-3" id ="pokemon-picture"></div>
-          <div class ="container col-9 info-stat">
-            <div class="row">
-              <div class="col-4">
-                <h5>Height</h3>
-                  <h5 id="height">N/A</h4>
+          <div class ="container col-9">
+            <div class="info-stat">
+              <div class="row">
+                <div class="col-3">
+                  <h5>name</h5>
+                  <h5 id="name"></h5>
+                </div>
+                <div class="col-3">
+                  <h5>ID</h5>
+                  <h5 id = "id"></h5>
+                </div>
+                <div class="col-3">
+                  <h5>Height</h3>
+                    <h5 id="height"></h4>
+                    </div>
+                    <div class="col-3">
+                      <h5>Weight</h5>
+                      <h5 id="weight"></h5>
+                    </div>
                   </div>
-              <div class="col-4">
-                    <h5>Weight</h5>
-                    <h5 id="weight">N/A</h5>
+              <div class="row">
+                    <div class="col-6">
+                      <h5>Abilities</h5>
+                      <h5 id="ability"></h5>
+                    </div>
+                    <div class="col-6">
+                      <h5>Type</h5>
+                      <h5 id="type">N/</h5>
+                    </div>
                   </div>
-              <div class="col-4">
-              <h5>Gender</h5>
-              <h5 id="gender">N/A</h5>
             </div>
-            </div>
-            <div class="row">
-              <div class="col-4">
-                <h5>Catagory</h5>
-                <h5 id = "catagory">N/A</h5>
-              </div>
-              <div class="col-4">
-                <h5>Abilities</h5>
-                <h5 id="ability">N/A</h5>
-              </div>
-              <div class="col-4">
-                <h5>Type</h5>
-                <h5 id="type">N/A</h5>
-              </div>
+            <div class="detail">
+              <p id="pokemon-detail"></p>              
             </div>
           </div>
 

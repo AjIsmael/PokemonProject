@@ -33,12 +33,12 @@
   }
 }
 .main-container {
-  height: 80vh;
-  margin-top: 3vh;
+  height: 84.25vh;
 }
 
 .first-container {
-  height: 50%;
+  margin-top: 3vh;
+  height: 65%;
 }
 .first-container:div {
   height: 100%;
@@ -48,6 +48,18 @@
   border: 5px solid rgba(153, 51, 51, 0.8);
   border-radius: 20px;
   background-color: rgba(153, 51, 51, 0.2);
+  height: 25vh;
+}
+.info-stat .row {
+  height: 50%;
+}
+
+.detail {
+  border: 5px solid rgba(153, 51, 51, 0.8);
+  border-radius: 20px;
+  background-color: rgba(153, 51, 51, 0.2);
+  height: 25vh;
+  margin-top: 1vh;
 }
 
 img {
@@ -57,12 +69,15 @@ img {
   animation-duration: 2s;
 }
 
-.new {
-  height: 80%;
-}
-
 body {
   background-color: rgba(139, 69, 19, 0.8);
+  margin: 0;
+}
+
+#pokemon-picture {
+  background-image: url("computer_2.png");
+  background-size: cover;
+  height: 25vh;
 }
 
 /*# sourceMappingURL=output.css.map */

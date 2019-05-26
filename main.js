@@ -29,6 +29,31 @@ function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
 
 }
 
+function showdetail(nameforUrl) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      detailObj = JSON.parse(this.responseText);
+      var englishDescription = []
+      for (var details of detailObj.flavor_text_entries) {
+          if (details.language.name == "en" & englishDescription.length < 3){
+            englishDescription.push(details.flavor_text);
+        }
+        }
+      document.getElementById('pokemon-detail').innerHTML = englishDescription[0] + englishDescription[1] + englishDescription[2]
+
+    }
+  };
+   if (isNaN(nameforUrl)){
+    url = `https://pokeapi.co/api/v2/pokemon-species/${nameforUrl}/`
+  } else {
+    url = `https://pokeapi.co/api/v2/pokemon-species/${+nameforUrl}/`
+  }
+  xhttp.open("GET", url, true);
+  xhttp.send();
+
+}
+
 
 class Pokemon{
   constructor(name,id,height,weight,abilities,type,hp,attack,defense,special_attack,special_defense,speed,url,trainerArray,trainerArrayName){
@@ -63,6 +88,7 @@ class Trainer{
   }
   get(identifier){
     loadDoc(identifier, this.pokemonCollector,this.trainerPokemonName)
+    showdetail(identifier)
 
   }
   all(){
@@ -79,10 +105,11 @@ function show(pokemonList, pokemonNameList) {
   pokemon = pokemonList[pokemonList.length-1]
   document.getElementById('height').innerHTML = pokemon.height
   document.getElementById('weight').innerHTML = pokemon.weight
-  document.getElementById('gender').innerHTML = pokemon.name
+  document.getElementById('name').innerHTML = pokemon.name
   document.getElementById('ability').innerHTML = pokemon.abilities
   document.getElementById('type').innerHTML = pokemon.type
   document.getElementById('hp').innerHTML = pokemon.hp
+  document.getElementById('id').innerHTML = pokemon.id
   percentageHp = (pokemon.hp/255)*100
   document.getElementById('hp-progress').style.width = `${percentageHp}%`
   if(pokemon.hp > 120){
