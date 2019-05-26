@@ -40,8 +40,11 @@ function showdetail(nameforUrl) {
             englishDescription.push(details.flavor_text);
         }
         }
-      document.getElementById('pokemon-detail').innerHTML = englishDescription[0] + englishDescription[1] + englishDescription[2]
-
+      var text = englishDescription[0] + englishDescription[1] + englishDescription[2]
+      document.getElementById('pokemon-detail').innerHTML = text
+      var synth = window.speechSynthesis
+      var utterThis = new SpeechSynthesisUtterance(text);
+      synth.speak(utterThis);
     }
   };
    if (isNaN(nameforUrl)){
