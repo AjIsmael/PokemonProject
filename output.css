@@ -91,4 +91,12 @@ img {
   width: 100%;
 }
 
+.logo {
+  background-image: url("trainerLogo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 10vh;
+}
+
 /*# sourceMappingURL=output.css.map */
