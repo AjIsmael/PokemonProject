@@ -29,29 +29,34 @@ function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
 
 }
 
-function showdetail(nameforUrl) {
+function loaddetail(language) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       detailObj = JSON.parse(this.responseText);
-      var englishDescription = []
+      var description = []
+
       for (var details of detailObj.flavor_text_entries) {
-          if (details.language.name == "en" & englishDescription.length < 3){
-            englishDescription.push(details.flavor_text);
+          if (details.language.name == language & description.length < 3){
+            description.push(details.flavor_text);
         }
         }
-      var text = englishDescription[0] + englishDescription[1] + englishDescription[2]
+      var text = description[0] + " " + description[1]
       document.getElementById('pokemon-detail').innerHTML = text
       var synth = window.speechSynthesis
       var utterThis = new SpeechSynthesisUtterance(text);
+      if (language == 'en'){
+        utterThis.lang = 'en-US'
+      }
+      if (language == 'fr'){
+        utterThis.lang = 'fr-FR'
+      }
+      synth.cancel();
       synth.speak(utterThis);
     }
   };
-   if (isNaN(nameforUrl)){
-    url = `https://pokeapi.co/api/v2/pokemon-species/${nameforUrl}/`
-  } else {
-    url = `https://pokeapi.co/api/v2/pokemon-species/${+nameforUrl}/`
-  }
+  nameforDetail = document.getElementById('name').innerHTML
+    url = `https://pokeapi.co/api/v2/pokemon-species/${nameforDetail}/`
   xhttp.open("GET", url, true);
   xhttp.send();
 
@@ -91,7 +96,7 @@ class Trainer{
   }
   get(identifier){
     loadDoc(identifier, this.pokemonCollector,this.trainerPokemonName)
-    showdetail(identifier)
+
 
   }
   all(){
@@ -101,6 +106,7 @@ class Trainer{
 }
 ajaeb = new Trainer("Ajaeb")
 function fetch(){
+  window.speechSynthesis.cancel();
   var x = document.getElementById("myInput");
   ajaeb.get(x.value)
 }
@@ -113,6 +119,7 @@ function show(pokemonList, pokemonNameList) {
   document.getElementById('type').innerHTML = pokemon.type
   document.getElementById('hp').innerHTML = pokemon.hp
   document.getElementById('id').innerHTML = pokemon.id
+  document.getElementById('pokemon-detail').innerHTML = ""
   percentageHp = (pokemon.hp/255)*100
   document.getElementById('hp-progress').style.width = `${percentageHp}%`
   if(pokemon.hp > 120){

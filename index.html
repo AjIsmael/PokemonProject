@@ -30,40 +30,49 @@
     <section class="container main-container">
       <div class="container first-container">
         <div class="row">
-          <div class="col-3" id ="pokemon-picture"></div>
-          <div class ="container col-9">
-            <div class="info-stat">
+          <div class="col-md-3 col-sm-12" id ="pokemon-picture"></div>
+          <div class ="container col-sm-12 col-md-9">
+            <div class="info-stat col-12">
               <div class="row">
                 <div class="col-3">
-                  <h5>name</h5>
-                  <h5 id="name"></h5>
+                  <label>Name</label>
+                  <h5 id="name"> </h5>
                 </div>
                 <div class="col-3">
-                  <h5>ID</h5>
-                  <h5 id = "id"></h5>
+                  <label>ID</label>
+                  <h5 id = "id"> </h5>
                 </div>
                 <div class="col-3">
-                  <h5>Height</h3>
-                    <h5 id="height"></h4>
+                  <label>Height</label>
+                    <h5 id="height"> </h4>
                     </div>
                     <div class="col-3">
-                      <h5>Weight</h5>
-                      <h5 id="weight"></h5>
+                      <label>Weight</label>
+                      <h5 id="weight"> </h5>
                     </div>
                   </div>
               <div class="row">
                     <div class="col-6">
-                      <h5>Abilities</h5>
-                      <h5 id="ability"></h5>
+                      <label>Abilities</label>
+                      <h5 id="ability"> </h5>
                     </div>
                     <div class="col-6">
-                      <h5>Type</h5>
-                      <h5 id="type">N/</h5>
+                      <label>Type</label>
+                      <h5 id="type"> </h5>
                     </div>
                   </div>
             </div>
             <div class="detail">
-              <p id="pokemon-detail"></p>              
+              <form>
+                <label> More details About the Pokemon </label>
+                <label class="radio-inline">
+                  <input type="radio" name="optradio" onclick="loaddetail('en')">English
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="optradio" onclick="loaddetail('fr')">Francie
+                </label>
+              </form>
+              <p id="pokemon-detail"></p>
             </div>
           </div>
 
@@ -71,27 +80,27 @@
       </div>
       <div class="container">
         <div class="row">
-        <div class ="container col-9 info-stat">
+        <div class ="container col-sm-12 col-md-9 info-stat">
           <div class="row">
             <div class="col-4">
-              <h5>HP</h5>
-              <h5 id ="hp">N/A</h5>
+              <label>HP</label>
+              <h5 id ="hp"> </h5>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped active" id="hp-progress" role="progressbar" style="width:0%">
                 </div>
               </div>
             </div>
             <div class="col-4">
-              <h5>Attack</h5>
-              <h5 id="attack">N/A</h5>
+              <label>Attack</label>
+              <h5 id="attack"> </h5>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped active" id="attack-progress" role="progressbar" style="width:0%">
                 </div>
               </div>
             </div>
             <div class="col-4">
-              <h5>Defense</h5>
-              <h5 id="defense">N/A</h5>
+              <label>Defense</label>
+              <h5 id="defense"> </h5>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped active" id="defense-progress" role="progressbar" style="width:0%">
                 </div>
@@ -100,23 +109,23 @@
           </div>
           <div class="row">
             <div class="col-4">
-              <h5>Special Attack</h5>
-              <h5 id = "special-attack">N/A</h5>
+              <label>Special Attack</label>
+              <h5 id = "special-attack"> </h5>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped active" id="sa-progress" role="progressbar" style="width:0%"></div>
               </div>
             </div>
             <div class="col-4">
-              <h5>Special Defense</h5>
-              <h5 id="special-defense">N/A</h5>
+              <label>Special Defense</label>
+              <h5 id="special-defense"> </h5>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped active" id="sd-progress" role="progressbar" style="width:0%">
                 </div>
               </div>
             </div>
             <div class="col-4">
-              <h5>Speed</h5>
-              <h5 id="speed">N/A</h5>
+              <label>Speed</label>
+              <h5 id="speed"> </h5>
               <div class="progress">
                 <div class="progress-bar progress-bar-striped active" id="sp-progress" role="progressbar" style="width:0%">
                 </div>
@@ -131,19 +140,16 @@
       </div>
     </section>
     <footer class="footerbar">
+      <div>
+        <a href="https://www.w3school.com">w3school</a>
+      </div>
+      <div>
+        <a href="https://www.getbootstrap.com">Bootstrap</a>
+      </div>
+      <div>
+        <a href="http://fizal.me/pokeapi/">Pokemon API</a>
+      </div>
         <div class="footerbar-top-section">
-          <div>
-            <a href="https://www.w3school.com">w3school</a>
-          </div>
-          <div>
-            <a href="https://www.getbootstrap.com">Bootstrap</a>
-          </div>
-          <div>
-            <a href="http://fizal.me/pokeapi/">Pokemon API</a>
-          </div>
-        </div>
-        <div>
-
         </div>
     </footer>
     <script src="main.js" charset="utf-8"></script>
