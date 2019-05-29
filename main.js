@@ -24,6 +24,7 @@ function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
   } else {
     url = `https://fizal.me/pokeapi/api/v2/id/${+nameforUrl}.json`
   }
+
   xhttp.open("GET", url, true);
   xhttp.send();
 
