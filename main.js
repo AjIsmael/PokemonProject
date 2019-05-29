@@ -1,3 +1,4 @@
+window.speechSynthesis.cancel()
 function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -27,39 +28,46 @@ function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
 
   xhttp.open("GET", url, true);
   xhttp.send();
-
 }
 
 function loaddetail(language) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      detailObj = JSON.parse(this.responseText);
-      var description = []
+  if(document.getElementById('name').innerHTML == " "){
+    if(language == 'en'){
+      document.getElementById('pokemon-detail').innerHTML = "You did not choose a Pokemon Yet"
+    } else {
+      document.getElementById('pokemon-detail').innerHTML = "Vous n'avez pas encore choisi de Pokémon"
+    }
+  } else {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        detailObj = JSON.parse(this.responseText);
+        var description = []
 
-      for (var details of detailObj.flavor_text_entries) {
+        for (var details of detailObj.flavor_text_entries) {
           if (details.language.name == language & description.length < 3){
             description.push(details.flavor_text);
+          }
         }
+        var text = description[0] + " " + description[1]
+        document.getElementById('pokemon-detail').innerHTML = text
+        var synth = window.speechSynthesis
+        var utterThis = new SpeechSynthesisUtterance(text);
+        if (language == 'en'){
+          utterThis.lang = 'en-US'
         }
-      var text = description[0] + " " + description[1]
-      document.getElementById('pokemon-detail').innerHTML = text
-      var synth = window.speechSynthesis
-      var utterThis = new SpeechSynthesisUtterance(text);
-      if (language == 'en'){
-        utterThis.lang = 'en-US'
+        if (language == 'fr'){
+          utterThis.lang = 'fr-FR'
+        }
+        synth.cancel();
+        synth.speak(utterThis);
       }
-      if (language == 'fr'){
-        utterThis.lang = 'fr-FR'
-      }
-      synth.cancel();
-      synth.speak(utterThis);
-    }
-  };
-  nameforDetail = document.getElementById('name').innerHTML
+    };
+    nameforDetail = document.getElementById('name').innerHTML
     url = `https://pokeapi.co/api/v2/pokemon-species/${nameforDetail}/`
-  xhttp.open("GET", url, true);
-  xhttp.send();
+    xhttp.open("GET", url, true);
+    xhttp.send();
+  }
 
 }
 
@@ -95,10 +103,18 @@ class Trainer{
     this.pokemonCollector = []
     this.trainerPokemonName = []
   }
-  get(identifier){
+  addPokemon(identifier){
     loadDoc(identifier, this.pokemonCollector,this.trainerPokemonName)
 
 
+  }
+  get(identifier){
+    if(this.trainerPokemonName.includes(identifier)){
+      let b = this.trainerPokemonName.indexOf(identifier)
+      console.log(this.pokemonCollector[b]);
+    } else {
+      console.log("You don't have this Pokemon in your collection");
+    }
   }
   all(){
     return this.pokemonCollector
@@ -109,7 +125,7 @@ ajaeb = new Trainer("Ajaeb")
 function fetch(){
   window.speechSynthesis.cancel();
   var x = document.getElementById("myInput");
-  ajaeb.get(x.value)
+  ajaeb.addPokemon(x.value)
 }
 function show(pokemonList, pokemonNameList) {
   pokemon = pokemonList[pokemonList.length-1]
@@ -216,7 +232,7 @@ function show(pokemonList, pokemonNameList) {
 
   his = document.createElement('a');
   his.setAttribute("class", 'dropdown-item');
-  his.setAttribute('href', `javascript:ajaeb.get('${pokemon.name}')`);
+  his.setAttribute('href', `javascript:ajaeb.addPokemon('${pokemon.name}')`);
   his.innerHTML = pokemon.name;
   document.getElementById('dropdown').appendChild(his)
   if(document.getElementById('dropdown').childElementCount == 11){
