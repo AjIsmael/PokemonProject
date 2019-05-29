@@ -1,4 +1,5 @@
 window.speechSynthesis.cancel()
+
 function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -29,6 +30,7 @@ function loadDoc(nameforUrl, trainerArray,trainerArrayName) {
   xhttp.open("GET", url, true);
   xhttp.send();
 }
+
 
 function loaddetail(language) {
   if(document.getElementById('name').innerHTML == " "){
@@ -97,6 +99,8 @@ class Pokemon{
     trainerArrayName.push(this.name);
   }
 }
+
+
 class Trainer{
   constructor(trainerName){
     this.trainerName = trainerName
@@ -121,12 +125,18 @@ class Trainer{
   }
 
 }
+
+
 ajaeb = new Trainer("Ajaeb")
+
+
 function fetch(){
   window.speechSynthesis.cancel();
   var x = document.getElementById("myInput");
   ajaeb.addPokemon(x.value)
 }
+
+
 function show(pokemonList, pokemonNameList) {
   pokemon = pokemonList[pokemonList.length-1]
   document.getElementById('height').innerHTML = pokemon.height
